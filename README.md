@@ -17,7 +17,7 @@
 - Visual application, GUI
 - Windows executable
 
-**_Version: 1.0.0_**
+**_Version: 1.0.1_**
 
 _For Vortex Studio v0.1.1_
 

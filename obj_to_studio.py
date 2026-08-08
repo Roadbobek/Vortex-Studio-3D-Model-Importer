@@ -84,7 +84,7 @@ def obj_to_block_json(
 
     # construct final project file
     project_data = {
-        "project_id": "imported_obj_project",
+        "project_id": project_id,
         "parts": parts,
         "lights": [default_light],
         "groups": []
