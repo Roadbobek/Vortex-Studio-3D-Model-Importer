@@ -97,4 +97,4 @@ def obj_to_block_json(
 
 
 # usage: .obj file path, project output file path, project id from .json, pitch (export quality)
-obj_to_block_json("model_samples\t34.obj", r"C:\Users\Roadb\Documents\Vortex Studio\obj_testing.json", "ba8fc01c0056996d375dedb7db02f973", 0.35)
+obj_to_block_json(r"model_samples\t34.obj", r"C:\Users\Roadb\Documents\Vortex Studio\obj_testing.json", "ba8fc01c0056996d375dedb7db02f973", 0.35)
