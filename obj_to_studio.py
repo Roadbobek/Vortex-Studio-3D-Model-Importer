@@ -3,13 +3,20 @@ import trimesh
 import numpy as np
 
 
-def obj_to_block_json(
+def main(
         obj_filepath,
-        output_filepath,
-        project_id,
+        project_filepath,
         pitch=1.0,
         default_colour=(0.8, 0.8, 0.8, 1.0)
 ):
+
+    # read and resolve info from project file
+    # TODO: consider streaming parsers like ijson to avoid loading entire file into memory
+    with open(project_filepath, "r") as project_read:
+        project_read_data = json.load(project_read)
+
+    project_id = project_read_data["project_id"]
+
     # load obj mesh
     mesh = trimesh.load(obj_filepath, force='mesh')
 
@@ -47,7 +54,7 @@ def obj_to_block_json(
                 "a": default_colour[3]
             },
             "material": "Plastic",
-            "group": None,
+            "group": 0,
             "cast_shadow": True,
             "anchored": True,
             "can_collide": True,
@@ -87,14 +94,14 @@ def obj_to_block_json(
         "project_id": project_id,
         "parts": parts,
         "lights": [default_light],
-        "groups": []
+        "groups": [{ "name": "Imported_Model", "parent_group": None }]
     }
 
-    with open(output_filepath, "w") as f:
+    with open(project_filepath, "w") as f:
         json.dump(project_data, f, indent=2)
 
-    print(f"Successfully converted {len(parts)} blocks to {output_filepath}")
+    print(f"Successfully converted {len(parts)} blocks to {project_filepath}")
 
 
 # usage: .obj file path, project output file path, project id from .json, pitch (export quality)
-obj_to_block_json(r"model_samples\t34.obj", r"C:\Users\Roadb\Documents\Vortex Studio\obj_testing.json", "ba8fc01c0056996d375dedb7db02f973", 0.35)
+main(r"sample_models\t34.obj", r"C:\Users\Roadb\Documents\Vortex Studio\v0.1.3_obj_testing_1.json", 1.00)
